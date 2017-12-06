@@ -8,7 +8,7 @@ $(document).ready(function() {
             ],
             "types": {
                 "data1": "area-step",
-                "data2": "area-stepg"
+                "data2": "area-step"
             },
             "colors": {
                 "data1": "red",
@@ -46,7 +46,7 @@ $(document).ready(function() {
 
             datasets: [
                 {
-                    data:[21,15,18],
+                    data:[11,15,18],
                     // fill: 'false',
                     borderColor:"gray",
                     backgroundColor:"lightgray"
