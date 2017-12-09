@@ -1,26 +1,28 @@
 #StyleForRegion .bb-region-0 {fill:red;}
 #StyleForRegion .bb-region.foo {fill:green;}
 
-.democrat {
-    fill:blue;
-}
-
-.republican {
-    fill:red;
-}
 
 #cabinetChartContainer {
     position:absolute;
     top: 0;
-    z-index:500;
+    z-index:2;
     margin-left:14px;
-
 }
 
-#somethingElseChart {
-    margin-top:50px;
+#adminPartyChartContainer {
+    position:absolute;
+    top: 1250px;
+    z-index:3;
+    margin-left:14px;
+}
+
+#testChart {
+    position:absolute;
+    top: 550px;
+    z-index:2;
+    margin-left:14px;
 }
 
 #appointmentsChart {
-    margin-top: 100px;
+    margin-top: 0px;
 }

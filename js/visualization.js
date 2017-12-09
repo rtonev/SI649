@@ -3,59 +3,29 @@ Array.prototype.max = function() {
 };
 
 
-
-
-function drawCharts(data) {
-    var colorChart = bb.generate({
-        "data": {
-            "columns": [
-                ["data1", 0, 0, 0, 5, 5, 5],
-                ["data2", 5, 5, 5, 0, 0, 0]
-            ],
-            "types": {
-                "data1": "area-step",
-                "data2": "area-step"
-            },
-            "colors": {
-                "data1": "red",
-                "data2": "blue"
-            }
-        },
-        "size": {
-            "height": 550,
-            "width": 1200
-        },
-
-        "axis": {
-            y: {
-                show:false
-            },
-            x: {
-                show:false
-            }
-        },
-        "bindto": "#cabinetChart",
-        "legend": {
-            "show": false
-        },
-        "tooltip": {
-            "show": false
-        }
-    });
-
-    var avgDaysServedChart = new Chart($("#avgDaysServedChart"), {
+function drawChart(data, labels, container, title) {
+    var chart = new Chart(container, {
         type: 'line',
         data : {
-            labels:data.Year,
+            labels:labels,
 
             datasets: [
                 {
+                    data: Array.apply(null, new Array(229)).map(Number.prototype.valueOf,data[228]),
+                    fill: false,
+                    radius: 0,
+                    borderColor:"rgba(0,0,0,0.2)",
+
+                    backgroundColor: "rgba(225,0,0,1)"
+                },
+                {
                     borderWidth: 1,
-                    data:data.AvgDaysServed,
+                    data:data,
                     borderColor:"gray",
                     backgroundColor:"lightgray",
 
-                }
+                },
+
             ]
         },
         options: {
@@ -68,13 +38,13 @@ function drawCharts(data) {
                 }
             },
             legend: {
-                display: false,
+                display: false
             },
             responsive: false,
             title: {
                 fontSize:16,
                 display: true,
-                text: 'Average Days Served'
+                text: title
             },
             label: {
                 display: false
@@ -82,16 +52,14 @@ function drawCharts(data) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true,
+                        beginAtZero:true
                         // max: 20,
                         // stepSize: 1
                     },
                     gridLines: {
                         display: false,
                         color:"white"
-                    },
-
-
+                    }
                 }],
 
                 xAxes: [{
@@ -99,83 +67,27 @@ function drawCharts(data) {
                 }]
 
 
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 25,
+                    bottom: 0
+                }
             }
         }
     });
+}
 
-    var appointmentsChart = new Chart($("#appointmentsChart"), {
-        type: 'line',
-
-        data : {
-            labels: data.Year,
-
-            datasets: [
-                {
-                    borderWidth: 1,
-                    data:data.NumAppointments,
-                    // fill: 'false',
-                    borderColor:"gray",
-                    backgroundColor:"lightgray"
-
-                }
-            ]
-        },
-        options: {
-            elements: {
-                point: {
-                    radius: 0
-                },
-                line: {
-                    tension: 0
-                }
-            },
-            legend: {
-                display: false,
-            },
-            responsive: false,
-            title: {
-                fontSize:16,
-                display: true,
-                text: 'Number of Appointments per Cabinet'
-            },
-            label: {
-                display: false
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true,
-                        // max: 20,
-                        // stepSize: 1
-                    },
-                    gridLines: {
-                        display: false,
-                        color:"white"
-                    },
-
-
-                }],
-
-                xAxes: [{
-                    display: false
-
-                }]
-
-
-            }
-        }
-    });
-
-
-
-
-    var yearsChart = new Chart($("#yearsChart"), {
+function drawLabelChart(data, labels, container, paddingBottom) {
+    var labelChart = new Chart(container, {
         type: 'line',
         data : {
-            labels: data.Year,
+            labels: labels,
             datasets: [
                 {
-                    data:data.Zero,
+                    data:data,
                     label: "",
                     fill:"white",
                     backgroundColor:"white",
@@ -224,74 +136,148 @@ function drawCharts(data) {
                     left: 15,
                     right: 15,
                     top: 0,
-                    bottom: 50
+                    bottom: paddingBottom
                 }
             }
 
         }
     });
+}
 
-    var presidentChart = new Chart($("#presidentChart"), {
-        type: 'line',
-        data : {
-            labels: data.Administration,
-            datasets: [
-                {
-                    data:data.Zero,
-                    label: "",
-                    fill:"white",
-                    backgroundColor:"white",
-                    borderColor:"white"
 
-                }
-            ]
+function drawCharts(data) {
+    var SenateMajorityColorChart = bb.generate({
+        "data": {
+            "columns": [
+                data.SenateMajority.Republican,
+                data.SenateMajority.Democrat,
+                data.SenateMajority.Other
+            ],
+            "types": {
+                "republican": "area-step",
+                "democrat": "area-step",
+                "other": "area-step"
+            },
+            "colors": {
+                "republican": "red",
+                "democrat": "blue",
+                "other": "gray"
+            }
         },
-        options: {
-            responsive: false,
-            title: {
-                display: false,
-                text: 'President'
-            },
-            legend: {
-                display:false,
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:false
-                    },
-                    display:false
+        "size": {
+            "height": 1250,
+            "width": 1200
+        },
 
-
-                }],
-
-                xAxes: [{
-                    display: true,
-                    gridLines: {
-                        display: false,
-                        color:"white"
-                    },
-                    ticks: {
-                        color:"white",
-                        // autoSkip: false,
-                        maxRotation: 90,
-                        minRotation: 90
-                    }
-                }]
-
-
-            },
-            layout: {
+        "axis": {
+            y: {
+                show:false,
                 padding: {
-                    left: 15,
-                    right: 15,
                     top: 0,
-                    bottom: 150
+                    bottom: 0
                 }
-            }
 
+            },
+            x: {
+                tick: {
+                    outer: false
+                },
+                show:false
+
+            }
+        },
+        "bindto": "#cabinetChart",
+        "legend": {
+            "show": false
+        },
+        "tooltip": {
+            "show": false
         }
     });
+
+    var AdminPartyColorChart = bb.generate({
+        "data": {
+            border: {
+                show:false
+            },
+            "columns": [
+                data.AdminParty.Republican,
+                data.AdminParty.Democrat,
+                data.AdminParty.Other
+            ],
+            "types": {
+                "republican": "area-step",
+                "democrat": "area-step",
+                "other": "area-step"
+            },
+            "colors": {
+                "republican": "red",
+                "democrat": "blue",
+                "other": "gray"
+            }
+        },
+        "size": {
+            "height": 150,
+            "width": 1200
+        },
+
+        "axis": {
+            y: {
+                show:false,
+                padding: {
+                    top: 0,
+                    bottom: 0
+                }
+
+            },
+            x: {
+                tick: {
+                    outer: false
+                },
+                show:false
+
+
+            }
+        },
+        "bindto": "#adminPartyChart",
+        "legend": {
+            "show": false
+        },
+        "tooltip": {
+            "show": false
+        }
+    });
+
+    drawChart(data.AvgDaysServed, data.Year, $("#avgDaysServedChart"), 'Average Days Served');
+    drawChart(data.NumAppointments, data.Year,  $("#appointmentsChart"), 'Number of Appointments per Cabinet');
+    drawChart(data.AvgEaseOfConfirmation, data.Year,  $("#avgEaseOfConfirmationChart"), 'Average Ease of Confirmation');
+    drawChart(data.PerMinority, data.Year,  $("#perMinorityChart"), '% Minority');
+    drawChart(data.PerMale, data.Year,  $("#perMaleChart"), '% Male');
+    drawChart(data.PerMilitary, data.Year,  $("#perMilitaryChart"), '% Served in the Military');
+
+    drawLabelChart(data.Zero, data.Year, $("#yearsChart"), 50);
+    drawLabelChart(data.Zero, data.Administration, $("#presidentChart"), 150);
+
+    // var myChart = new Chart($("#testChart"), {
+    //     type:"line",
+    //     data: {
+    //         datasets: [
+    //             {
+    //                 backgroundColor: "red",
+    //                 fill: 'start',
+    //                 data: [-10,0,1,1,1,1]
+    //             },
+    //             {
+    //                 backgroundColor: "blue",
+    //                 fill: 'start',
+    //                 data: [0,0,0,1,1,0]
+    //             }
+    //
+    //
+    //         ]
+    //     }
+    // });
+
 }
 
 $(document).ready(function() {
@@ -308,31 +294,80 @@ $(document).ready(function() {
             SenateMajorityA: [],
             SenateMajorityB: [],
             Zero: [],
-            Administration: []
+            Administration: [],
+            PerMale: [],
+            PerMinority: [],
+            PerMilitary: [],
+            PerDegrees:[],
+            AvgEaseOfConfirmation:[],
+            SenateMajority: {
+                "Republican": ["republican"],
+                "Democrat": ["democrat"],
+                "Other": ["other"]
+            },
+            AdminParty: {
+                "Republican": ["republican"],
+                "Democrat": ["democrat"],
+                "Other": ["other"]
+            }
         };
-        var previousAdministration = "noone";
+        var previousAdministration = "none";
         for (var index=0; index < clonedArray.length; index++) {
             var row = clonedArray[index];
             data.NumAppointments.push(row.NumAppointments);
             data.AvgDaysServed.push(row.AvgDaysServed);
+            data.AvgEaseOfConfirmation.push(row.AvgEaseOfConfirmation);
+            data.PerMilitary.push(row.PerMilitary);
+            data.PerDegrees.push(row.PerDegrees);
+            data.PerMinority.push(row.PerMinority);
+            data.PerMale.push(row.PerMale);
             data.Zero.push(0);
 
             var newAdministration = row.Administration;
-            if (previousAdministration == row.Administration) {
+            if (previousAdministration === row.Administration) {
                 data.Administration.push("");
                 data.Year.push("");
 
             } else {
-                var administrationTokens = newAdministration.split(" ");
+                // var administrationTokens = newAdministration.split(" ");
                 data.Administration.push(newAdministration);
                 data.Year.push(row.Year);
                 previousAdministration = newAdministration;
-
             }
+
+            if (row.SenateMajority === "Republican") {
+                data.SenateMajority.Republican.push(1);
+                data.SenateMajority.Democrat.push(0);
+                data.SenateMajority.Other.push(0);
+            } else if (row.SenateMajority === "Democrat") {
+                data.SenateMajority.Republican.push(0);
+                data.SenateMajority.Democrat.push(1);
+                data.SenateMajority.Other.push(0);
+            } else {
+                data.SenateMajority.Republican.push(0);
+                data.SenateMajority.Democrat.push(0);
+                data.SenateMajority.Other.push(1);
+            }
+
+            if (row.AdminParty === "Republican") {
+                data.AdminParty.Republican.push(1);
+                data.AdminParty.Democrat.push(0);
+                data.AdminParty.Other.push(0);
+            } else if (row.AdminParty === "Democrat") {
+                data.AdminParty.Republican.push(0);
+                data.AdminParty.Democrat.push(1);
+                data.AdminParty.Other.push(0);
+            } else {
+                data.AdminParty.Republican.push(0);
+                data.AdminParty.Democrat.push(0);
+                data.AdminParty.Other.push(1);
+            }
+
+
+
+
         }
-
         drawCharts(data);
-
         console.log(jsonArray[226]);
     });
 });
