@@ -26,3 +26,16 @@
 #appointmentsChart {
     margin-top: 0px;
 }
+
+#holder{
+  overflow: auto;
+}
+
+#slidercontrol {
+  padding-left: 10px;
+  padding-right: 200px;
+}
+
+#checkboxgroup {
+  /*padding-left: 1200px;*/
+}

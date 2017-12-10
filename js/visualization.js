@@ -11,7 +11,7 @@ function drawChart(data, labels, container, title) {
 
             datasets: [
                 {
-                    data: Array.apply(null, new Array(229)).map(Number.prototype.valueOf,data[228]),
+                    data: Array.apply(null, new Array(LENGTH_OF_ARRAY)).map(Number.prototype.valueOf,data[LENGTH_OF_ARRAY-1]),
                     fill: false,
                     radius: 0,
                     borderColor:"rgba(0,0,0,0.2)",
@@ -248,14 +248,36 @@ function drawCharts(data) {
         }
     });
 
+    $("#avgDaysServedChart").remove();
+    $( "#checkboxgroup" ).after('<canvas id="avgDaysServedChart" width="1200" height="200"></canvas>');
     drawChart(data.AvgDaysServed, data.Year, $("#avgDaysServedChart"), 'Average Days Served');
+
+    $("#appointmentsChart").remove();
+    $( "#avgDaysServedChart" ).after('<canvas id="appointmentsChart" width="1200" height="200"></canvas>');
     drawChart(data.NumAppointments, data.Year,  $("#appointmentsChart"), 'Number of Appointments per Cabinet');
+
+    $("#avgEaseOfConfirmationChart").remove();
+    $( "#appointmentsChart" ).after('<canvas id="avgEaseOfConfirmationChart" width="1200" height="200"></canvas>');
     drawChart(data.AvgEaseOfConfirmation, data.Year,  $("#avgEaseOfConfirmationChart"), 'Average Ease of Confirmation');
+
+    $("#perMinorityChart").remove();
+    $( "#avgEaseOfConfirmationChart" ).after('<canvas id="perMinorityChart" width="1200" height="200"></canvas>');
     drawChart(data.PerMinority, data.Year,  $("#perMinorityChart"), '% Minority');
+
+    $("#perMaleChart").remove();
+    $( "#perMinorityChart" ).after('<canvas id="perMaleChart" width="1200" height="200"></canvas>');
     drawChart(data.PerMale, data.Year,  $("#perMaleChart"), '% Male');
+
+    $("#perMilitaryChart").remove();
+    $( "#perMaleChart" ).after('<canvas id="perMilitaryChart" width="1200" height="200"></canvas>');
     drawChart(data.PerMilitary, data.Year,  $("#perMilitaryChart"), '% Served in the Military');
 
+    $("#yearsChart").remove();
+    $( "#perMilitaryChart" ).after('<canvas id="yearsChart" width="1200" height="200"></canvas>');
     drawLabelChart(data.Zero, data.Year, $("#yearsChart"), 50);
+
+    $("#presidentChart").remove();
+    $( "#yearsChart" ).after('<canvas id="presidentChart" width="1200" height="200"></canvas>');
     drawLabelChart(data.Zero, data.Administration, $("#presidentChart"), 150);
 
     // var myChart = new Chart($("#testChart"), {
@@ -279,9 +301,30 @@ function drawCharts(data) {
     // });
 
 }
-
+var FROM_YEAR = 1789;
+var TO_YEAR = 2017;
+var LENGTH_OF_ARRAY = 229;
 $(document).ready(function() {
+  drawChartSliderChange();
+  $("#range").ionRangeSlider({
+            hide_min_max: true,
+            keyboard: true,
+            min: 1789,
+            max: 2009,
+            from: 1789,
+            to: 2017,
+            type: 'double',
+            step: 1,
+            grid: true,
+            onChange: function (d) {
+              TO_YEAR = d.to;
+              FROM_YEAR = d.from;
+              drawChartSliderChange();
+    }
 
+        });
+
+        function drawChartSliderChange() {
     $.getJSON("data/american-cabinet.json", function(jsonArray) {
 
 
@@ -312,8 +355,11 @@ $(document).ready(function() {
             }
         };
         var previousAdministration = "none";
+        LENGTH_OF_ARRAY = 0;
         for (var index=0; index < clonedArray.length; index++) {
             var row = clonedArray[index];
+            if ((row.Year >= FROM_YEAR) && (row.Year <=TO_YEAR)) {
+              LENGTH_OF_ARRAY = LENGTH_OF_ARRAY + 1;
             data.NumAppointments.push(row.NumAppointments);
             data.AvgDaysServed.push(row.AvgDaysServed);
             data.AvgEaseOfConfirmation.push(row.AvgEaseOfConfirmation);
@@ -362,12 +408,11 @@ $(document).ready(function() {
                 data.AdminParty.Democrat.push(0);
                 data.AdminParty.Other.push(1);
             }
-
-
-
-
+          }
         }
         drawCharts(data);
+        console.log(LENGTH_OF_ARRAY);
         console.log(jsonArray[226]);
     });
+  };
 });
