@@ -145,7 +145,7 @@ function drawLabelChart(data, labels, container, paddingBottom) {
 }
 
 
-function drawCharts(data) {
+function drawCharts(data, SenateMajorityHeight) {
     var SenateMajorityColorChart = bb.generate({
         "data": {
             "columns": [
@@ -165,7 +165,7 @@ function drawCharts(data) {
             }
         },
         "size": {
-            "height": 1250,
+            "height": senateMajorityHeight,
             "width": 1200
         },
 
@@ -249,7 +249,7 @@ function drawCharts(data) {
     });
 
     $("#avgDaysServedChart").remove();
-    $( "#checkboxgroup" ).after('<canvas id="avgDaysServedChart" width="1200" height="200"></canvas>');
+    $( "body" ).after('<canvas id="avgDaysServedChart" width="1200" height="200"></canvas>');
     drawChart(data.AvgDaysServed, data.Year, $("#avgDaysServedChart"), 'Average Days Served');
 
     $("#appointmentsChart").remove();
@@ -305,15 +305,76 @@ var FROM_YEAR = 1789;
 var TO_YEAR = 2017;
 var LENGTH_OF_ARRAY = 229;
 $(document).ready(function() {
+
+  $('#AvgDaysServed').prop('checked', true);
+  $('#numAppointments').prop('checked', true);
+  $('#avgEaseOfConfirmation').prop('checked', true);
+  $('#perMinority').prop('checked', true);
+  $('#perMale').prop('checked', true);
+  $('#perMilitary').prop('checked', true);
+
+    $('#AvgDaysServed').change(function() {
+    if(this.checked){
+      $('#avgDaysServedChart').show();
+    }
+    else {
+      $('#avgDaysServedChart').hide();
+    }
+  });
+
+  $('#numAppointments').change(function() {
+  if(this.checked){
+    $('#appointmentsChart').show();
+  }
+  else {
+    $('#appointmentsChart').hide();
+  }
+  });
+
+  $('#avgEaseOfConfirmation').change(function() {
+  if(this.checked){
+    $('#avgEaseOfConfirmationChart').show();
+  }
+  else {
+    $('#avgEaseOfConfirmationChart').hide();
+  }
+  });
+
+  $('#perMinority').change(function() {
+  if(this.checked){
+    $('#perMinorityChart').show();
+  }
+  else {
+    $('#perMinorityChart').hide();
+  }
+  });
+
+  $('#perMale').change(function() {
+  if(this.checked){
+    $('#perMaleChart').show();
+  }
+  else {
+    $('#perMaleChart').hide();
+  }
+  });
+
+  $('#perMilitary').change(function() {
+  if(this.checked){
+    $('#perMilitaryChart').show();
+  }
+  else {
+    $('#perMilitaryChart').hide();
+  }
+  });
+
   drawChartSliderChange();
   $("#range").ionRangeSlider({
             hide_min_max: true,
             keyboard: true,
             min: 1789,
-            max: 2009,
+            max: 2017,
             from: 1789,
             to: 2017,
-            type: 'double',
             step: 1,
             grid: true,
             onChange: function (d) {
@@ -324,7 +385,7 @@ $(document).ready(function() {
 
         });
 
-        function drawChartSliderChange() {
+        function drawChartSliderChange(chartHeight) {
     $.getJSON("data/american-cabinet.json", function(jsonArray) {
 
 
@@ -410,7 +471,18 @@ $(document).ready(function() {
             }
           }
         }
-        drawCharts(data);
+
+        var checkboxArray = ['#perMinority', '#avgEaseOfConfirmation', '#numAppointments', '#AvgDaysServed', '#perMale', '#perMilitary'];
+        var checkCounter = 0;
+        for (var c = 0; c < checkboxArray.length; c++) {
+          if ($(checkboxArray[c]).prop('checked', true)){
+            checkCounter++;
+          }
+        }
+        senateMajorityHeight = 208*checkCounter;
+        $("#adminPartyChartContainer").css("top", senateMajorityHeight);
+        console.log(checkCounter);
+        drawCharts(data, senateMajorityHeight);
         console.log(LENGTH_OF_ARRAY);
         console.log(jsonArray[226]);
     });

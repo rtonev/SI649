@@ -11,7 +11,7 @@
 
 #adminPartyChartContainer {
     position:absolute;
-    top: 1250px;
+    /*top: 1250px;*/
     z-index:3;
     margin-left:14px;
 }
@@ -32,10 +32,17 @@
 }
 
 #slidercontrol {
+  position: relative;
+  top: 1600px;
   padding-left: 10px;
   padding-right: 200px;
 }
 
 #checkboxgroup {
-  /*padding-left: 1200px;*/
+  position:absolute;
+  top:1700px;
+}
+
+label.form-check-label {
+  padding-left: 20px;
 }
