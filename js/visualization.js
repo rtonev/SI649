@@ -291,43 +291,13 @@ function drawCharts(data, senateMajorityHeight) {
     $("#yearsChart").remove();
     $( "#cabinetCharts" ).after('<canvas id="yearsChart" width="1200" height="200"></canvas>');
     drawLabelChart(data.Zero, data.Year, $("#yearsChart"), 50);
-
-
-
-
-
-    // var myChart = new Chart($("#testChart"), {
-    //     type:"line",
-    //     data: {
-    //         datasets: [
-    //             {
-    //                 backgroundColor: "red",
-    //                 fill: 'start',
-    //                 data: [-10,0,1,1,1,1]
-    //             },
-    //             {
-    //                 backgroundColor: "blue",
-    //                 fill: 'start',
-    //                 data: [0,0,0,1,1,0]
-    //             }
-    //
-    //
-    //         ]
-    //     }
-    // });
-
 }
 var FROM_YEAR = 1789;
 var TO_YEAR = 2017;
 var LENGTH_OF_ARRAY = 229;
 $(document).ready(function() {
 
-    // $('#AvgDaysServed').prop('checked', true);
-    // $('#numAppointments').prop('checked', true);
-    // $('#avgEaseOfConfirmation').prop('checked', true);
-    // $('#perMinority').prop('checked', true);
-    // $('#perMale').prop('checked', true);
-    // $('#perMilitary').prop('checked', true);
+
 
     $('#AvgDaysServed').change(function() {
         if(this.checked){
