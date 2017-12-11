@@ -21,60 +21,49 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
     </head>
     <body>
-    <!--<div id="presidentChart"></div>-->
-    <canvas id="avgDaysServedChart" width="1200" height="200"></canvas>
-    <canvas id="appointmentsChart" width="1200" height="200"></canvas>
-    <canvas id="avgEaseOfConfirmationChart" width="1200" height="200"></canvas>
-    <canvas id="perMinorityChart" width="1200" height="200"></canvas>
-    <canvas id="perMaleChart" width="1200" height="200"></canvas>
-    <canvas id="perMilitaryChart" width="1200" height="200"></canvas>
-
-    <canvas id="yearsChart" style="margin-left:14px;" width="1200" height="45"></canvas>
-    <canvas id="presidentChart" style="margin-left:14px;" width="1200" height="150"></canvas>
-    <canvas id="testChart" width="1200" height="150"></canvas>
-
-    <div id="cabinetChartContainer">
-        <div id="cabinetChart" style="position:relative"></div>
-    </div>
-    <!--<canvas id="myChart" style="margin-left:14px;" width="1200" height="42"></canvas>-->
-    <div id="adminPartyChartContainer">
-        <div id="adminPartyChart" style="position:relative"></div>
-    </div>
-
-
-    <div id="slidercontrol">
-      <div>
-        <input type="text" id="range" value="" name="range" />
-      </div>
-    </div>
-
-    <div id="checkboxgroup">
-      <div class="form-inline">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" name="graphsDisplay" value="AvgDaysServed" id="AvgDaysServed">
-          Average Days Served
-        </label>
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" name="graphsDisplay" value="numAppointments" id="numAppointments">
-          # of appointments per Cabinet
-        </label>
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" name="graphsDisplay" value="avgEaseOfConfirmation" id="avgEaseOfConfirmation">
-          Average ease of Confirmation
-        </label>
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" name="graphsDisplay" value="perMinority" id="perMinority">
-          % Minority
-        </label>
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" name="graphsDisplay" value="perMale" id="perMale">
-          % Male
-        </label>
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" name="graphsDisplay" value="perMilitary" id="perMilitary">
-          % Served in Military
-        </label>
-      </div>
-    </div>
+        <div id="cabinetCharts"></div>
+        <canvas id="yearsChart" style="margin-left:14px;" width="1200" height="45"></canvas>
+        <canvas id="presidentChart" style="margin-left:14px;" width="1200" height="150"></canvas>
+        <div id="cabinetChartContainer">
+            <div id="cabinetChart" style="position:relative"></div>
+        </div>
+        <div id="adminPartyChartContainer">
+            <div id="adminPartyChart" style="position:relative"></div>
+        </div>
+        <div id="controls">
+            <div id="slidercontrol">
+                <div>
+                    <input type="text" id="range" value="" name="range" />
+                </div>
+            </div>
+            <div id="checkboxgroup">
+                <div class="form-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="AvgDaysServed" id="AvgDaysServed" >
+                        Average Days Served
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="numAppointments" id="numAppointments" >
+                        # of appointments per Cabinet
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="avgEaseOfConfirmation" id="avgEaseOfConfirmation" >
+                        Average ease of Confirmation
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="perMinority" id="perMinority" >
+                        % Minority
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="perMale" id="perMale" >
+                        % Male
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="perMilitary" id="perMilitary" checked>
+                        % Served in Military
+                    </label>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

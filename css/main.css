@@ -30,17 +30,23 @@
 #holder{
   overflow: auto;
 }
-
-#slidercontrol {
-  position: relative;
-  top: 1600px;
-  padding-left: 10px;
-  padding-right: 200px;
+#controls {
+    position: absolute;
+    top: 1600px;
+    padding-left: 10px;
+    padding-right: 200px;
 }
 
+/*#slidercontrol {*/
+  /*position: relative;*/
+  /*top: 1600px;*/
+  /*padding-left: 10px;*/
+  /*padding-right: 200px;*/
+/*}*/
+
 #checkboxgroup {
-  position:absolute;
-  top:1700px;
+  position:relative;
+  top:50px;
 }
 
 label.form-check-label {

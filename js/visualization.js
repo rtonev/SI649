@@ -145,7 +145,7 @@ function drawLabelChart(data, labels, container, paddingBottom) {
 }
 
 
-function drawCharts(data, SenateMajorityHeight) {
+function drawCharts(data, senateMajorityHeight) {
     var SenateMajorityColorChart = bb.generate({
         "data": {
             "columns": [
@@ -249,36 +249,52 @@ function drawCharts(data, SenateMajorityHeight) {
     });
 
     $("#avgDaysServedChart").remove();
-    $( "body" ).after('<canvas id="avgDaysServedChart" width="1200" height="200"></canvas>');
-    drawChart(data.AvgDaysServed, data.Year, $("#avgDaysServedChart"), 'Average Days Served');
+    if ($('#AvgDaysServed').prop('checked') === true) {
+        $("#cabinetCharts").append('<canvas id="avgDaysServedChart" width="1200" height="200"></canvas>');
+        drawChart(data.AvgDaysServed, data.Year, $("#avgDaysServedChart"), 'Average Days Served');
+    }
 
     $("#appointmentsChart").remove();
-    $( "#avgDaysServedChart" ).after('<canvas id="appointmentsChart" width="1200" height="200"></canvas>');
-    drawChart(data.NumAppointments, data.Year,  $("#appointmentsChart"), 'Number of Appointments per Cabinet');
+    if ($('#numAppointments').prop('checked') === true) {
+        $("#cabinetCharts").append('<canvas id="appointmentsChart" width="1200" height="200"></canvas>');
+        drawChart(data.NumAppointments, data.Year,  $("#appointmentsChart"), 'Number of Appointments per Cabinet');
+    }
 
     $("#avgEaseOfConfirmationChart").remove();
-    $( "#appointmentsChart" ).after('<canvas id="avgEaseOfConfirmationChart" width="1200" height="200"></canvas>');
-    drawChart(data.AvgEaseOfConfirmation, data.Year,  $("#avgEaseOfConfirmationChart"), 'Average Ease of Confirmation');
+    if ($('#avgEaseOfConfirmation').prop('checked') === true) {
+        $("#cabinetCharts" ).append('<canvas id="avgEaseOfConfirmationChart" width="1200" height="200"></canvas>');
+        drawChart(data.AvgEaseOfConfirmation, data.Year,  $("#avgEaseOfConfirmationChart"), 'Average Ease of Confirmation');
+    }
 
     $("#perMinorityChart").remove();
-    $( "#avgEaseOfConfirmationChart" ).after('<canvas id="perMinorityChart" width="1200" height="200"></canvas>');
-    drawChart(data.PerMinority, data.Year,  $("#perMinorityChart"), '% Minority');
+    if ($('#perMinority').prop('checked') === true) {
+        $( "#cabinetCharts" ).append('<canvas id="perMinorityChart" width="1200" height="200"></canvas>');
+        drawChart(data.PerMinority, data.Year,  $("#perMinorityChart"), '% Minority');
+    }
 
     $("#perMaleChart").remove();
-    $( "#perMinorityChart" ).after('<canvas id="perMaleChart" width="1200" height="200"></canvas>');
-    drawChart(data.PerMale, data.Year,  $("#perMaleChart"), '% Male');
+    if ($('#perMale').prop('checked') === true) {
+        $("#cabinetCharts").append('<canvas id="perMaleChart" width="1200" height="200"></canvas>');
+        drawChart(data.PerMale, data.Year,  $("#perMaleChart"), '% Male');
+    }
 
     $("#perMilitaryChart").remove();
-    $( "#perMaleChart" ).after('<canvas id="perMilitaryChart" width="1200" height="200"></canvas>');
-    drawChart(data.PerMilitary, data.Year,  $("#perMilitaryChart"), '% Served in the Military');
-
-    $("#yearsChart").remove();
-    $( "#perMilitaryChart" ).after('<canvas id="yearsChart" width="1200" height="200"></canvas>');
-    drawLabelChart(data.Zero, data.Year, $("#yearsChart"), 50);
+    if ($('#perMilitary').prop('checked') === true) {
+        $("#cabinetCharts").append('<canvas id="perMilitaryChart" width="1200" height="200"></canvas>');
+        drawChart(data.PerMilitary, data.Year,  $("#perMilitaryChart"), '% Served in the Military');
+    }
 
     $("#presidentChart").remove();
-    $( "#yearsChart" ).after('<canvas id="presidentChart" width="1200" height="200"></canvas>');
+    $( "#cabinetCharts" ).after('<canvas id="presidentChart" width="1200" height="200"></canvas>');
     drawLabelChart(data.Zero, data.Administration, $("#presidentChart"), 150);
+
+    $("#yearsChart").remove();
+    $( "#cabinetCharts" ).after('<canvas id="yearsChart" width="1200" height="200"></canvas>');
+    drawLabelChart(data.Zero, data.Year, $("#yearsChart"), 50);
+
+
+
+
 
     // var myChart = new Chart($("#testChart"), {
     //     type:"line",
@@ -306,65 +322,71 @@ var TO_YEAR = 2017;
 var LENGTH_OF_ARRAY = 229;
 $(document).ready(function() {
 
-  $('#AvgDaysServed').prop('checked', true);
-  $('#numAppointments').prop('checked', true);
-  $('#avgEaseOfConfirmation').prop('checked', true);
-  $('#perMinority').prop('checked', true);
-  $('#perMale').prop('checked', true);
-  $('#perMilitary').prop('checked', true);
+    // $('#AvgDaysServed').prop('checked', true);
+    // $('#numAppointments').prop('checked', true);
+    // $('#avgEaseOfConfirmation').prop('checked', true);
+    // $('#perMinority').prop('checked', true);
+    // $('#perMale').prop('checked', true);
+    // $('#perMilitary').prop('checked', true);
 
     $('#AvgDaysServed').change(function() {
-    if(this.checked){
-      $('#avgDaysServedChart').show();
-    }
-    else {
-      $('#avgDaysServedChart').hide();
-    }
-  });
+        if(this.checked){
+            $('#avgDaysServedChart').show();
+        }
+        else {
+            $('#avgDaysServedChart').hide();
+        }
+        drawChartSliderChange();
+    });
 
   $('#numAppointments').change(function() {
-  if(this.checked){
-    $('#appointmentsChart').show();
-  }
-  else {
-    $('#appointmentsChart').hide();
-  }
+      if(this.checked){
+        $('#appointmentsChart').show();
+      }
+      else {
+        $('#appointmentsChart').hide();
+      }
+      drawChartSliderChange();
   });
 
   $('#avgEaseOfConfirmation').change(function() {
-  if(this.checked){
-    $('#avgEaseOfConfirmationChart').show();
-  }
-  else {
-    $('#avgEaseOfConfirmationChart').hide();
-  }
+      if(this.checked){
+        $('#avgEaseOfConfirmationChart').show();
+      }
+      else {
+        $('#avgEaseOfConfirmationChart').hide();
+      }
+      drawChartSliderChange();
   });
 
   $('#perMinority').change(function() {
-  if(this.checked){
-    $('#perMinorityChart').show();
-  }
-  else {
-    $('#perMinorityChart').hide();
-  }
+      if(this.checked){
+        $('#perMinorityChart').show();
+      }
+      else {
+        $('#perMinorityChart').hide();
+      }
+      drawChartSliderChange();
   });
 
   $('#perMale').change(function() {
-  if(this.checked){
-    $('#perMaleChart').show();
-  }
-  else {
-    $('#perMaleChart').hide();
-  }
+      if(this.checked){
+        $('#perMaleChart').show();
+      }
+      else {
+        $('#perMaleChart').hide();
+      }
+      drawChartSliderChange();
   });
 
   $('#perMilitary').change(function() {
-  if(this.checked){
-    $('#perMilitaryChart').show();
-  }
-  else {
-    $('#perMilitaryChart').hide();
-  }
+      if(this.checked){
+        $('#perMilitaryChart').show();
+      }
+      else {
+        $('#perMilitaryChart').hide();
+      }
+      drawChartSliderChange();
   });
 
   drawChartSliderChange();
@@ -385,9 +407,8 @@ $(document).ready(function() {
 
         });
 
-        function drawChartSliderChange(chartHeight) {
-    $.getJSON("data/american-cabinet.json", function(jsonArray) {
-
+    function drawChartSliderChange() {
+        $.getJSON("data/american-cabinet.json", function(jsonArray) {
 
         var clonedArray = JSON.parse(JSON.stringify(jsonArray));
 
@@ -475,16 +496,16 @@ $(document).ready(function() {
         var checkboxArray = ['#perMinority', '#avgEaseOfConfirmation', '#numAppointments', '#AvgDaysServed', '#perMale', '#perMilitary'];
         var checkCounter = 0;
         for (var c = 0; c < checkboxArray.length; c++) {
-          if ($(checkboxArray[c]).prop('checked', true)){
+          if ($(checkboxArray[c]).prop('checked') === true){
             checkCounter++;
           }
         }
-        senateMajorityHeight = 208*checkCounter;
+        var senateMajorityHeight =(200 * checkCounter) + 200;
         $("#adminPartyChartContainer").css("top", senateMajorityHeight);
-        console.log(checkCounter);
+        $("#controls").css("top", senateMajorityHeight + 200);
         drawCharts(data, senateMajorityHeight);
-        console.log(LENGTH_OF_ARRAY);
-        console.log(jsonArray[226]);
+
+
     });
   };
 });
