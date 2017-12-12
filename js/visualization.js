@@ -15,6 +15,8 @@ function calculateAverage(data) {
 }
 function drawChart(data, labels, container, title) {
     var average = calculateAverage(data);
+    console.log (LENGTH_OF_ARRAY);
+    console.log(data);
     var chart = new Chart(container, {
         type: 'line',
         data : {
@@ -26,22 +28,20 @@ function drawChart(data, labels, container, title) {
                     fill: false,
                     radius: 2,
                     borderWidth:0,
-                    borderColor:"rgba(0,255,0,0.0)",
+                    borderColor:"rgba(89,240,158,0.2)",
                     label: "Average",
-                    backgroundColor: "rgba(0,255,0,0.2)"
+                    backgroundColor: "rgba(89,240,158,0.2)"
                 },
                 {
                     data: Array.apply(null, new Array(LENGTH_OF_ARRAY)).map(Number.prototype.valueOf,data[LENGTH_OF_ARRAY-1]),
                     fill: false,
-                    radius: 2,
+                    radius: 1,
                     borderWidth:0,
-                    fillColor:"white",
-                    borderColor:"rgba(255,0,0,0)",
+                    borderColor:"rgba(225,0,0,0.2)",
                     label: "Trump",
                     backgroundColor: "rgba(225,0,0,0.2)"
                 },
                 {
-                    // label:"",
                     borderWidth: 2,
                     data:data,
                     borderColor:"#cccccc",
