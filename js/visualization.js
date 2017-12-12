@@ -226,14 +226,9 @@ function drawCharts(data, senateMajorityHeight) {
             "show": false
         },
         "tooltip": {
-            // "format": {
-            //     "title": function (d) { return '' },
-            //     "value": function (value, ratio, id) {
-            //         return 'Senate Majority Party';
-            //     }
-            // },
+
             contents: function() {
-                return "Color for senate majority party"
+                return "<div style='width:150px; height:50px; background-color: white; border: 1px solid gray'>Color indicating senate majority party</div>"
             },
             "show": true,
             "grouped": false
@@ -290,7 +285,13 @@ function drawCharts(data, senateMajorityHeight) {
             "show": false
         },
         "tooltip": {
-            "show": false
+
+            contents: function() {
+                return "<div style='width:150px; height:50px; background-color: white; border: 1px solid gray'>Color indicating Administration party</div>"
+            },
+            "show": true,
+            "grouped": false
+
         }
     });
 
