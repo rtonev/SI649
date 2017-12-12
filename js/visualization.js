@@ -233,7 +233,7 @@ function drawCharts(data, senateMajorityHeight) {
             //     }
             // },
             contents: function() {
-                return "Senate Majority Party"
+                return "Color for senate majority party"
             },
             "show": true,
             "grouped": false
