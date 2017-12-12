@@ -3,7 +3,18 @@ Array.prototype.max = function() {
 };
 
 
+function calculateAverage(data) {
+    var sum = 0;
+    for (var i=0; i<data.length; i++) {
+        sum += data[i];
+    }
+    var rawAverage = sum/data.length;
+
+    return Math.round(rawAverage * 100) / 100;
+
+}
 function drawChart(data, labels, container, title) {
+    var average = calculateAverage(data);
     var chart = new Chart(container, {
         type: 'line',
         data : {
@@ -11,18 +22,30 @@ function drawChart(data, labels, container, title) {
 
             datasets: [
                 {
-                    data: Array.apply(null, new Array(LENGTH_OF_ARRAY)).map(Number.prototype.valueOf,data[LENGTH_OF_ARRAY-1]),
+                    data: Array.apply(null, new Array(LENGTH_OF_ARRAY)).map(Number.prototype.valueOf,average),
                     fill: false,
-                    radius: 0,
-                    borderColor:"rgba(0,0,0,0.2)",
-
-                    backgroundColor: "rgba(225,0,0,1)"
+                    radius: 2,
+                    borderWidth:0,
+                    borderColor:"rgba(0,255,0,0.0)",
+                    label: "Average",
+                    backgroundColor: "rgba(0,255,0,0.2)"
                 },
                 {
-                    borderWidth: 1,
+                    data: Array.apply(null, new Array(LENGTH_OF_ARRAY)).map(Number.prototype.valueOf,data[LENGTH_OF_ARRAY-1]),
+                    fill: false,
+                    radius: 2,
+                    borderWidth:0,
+                    fillColor:"white",
+                    borderColor:"rgba(255,0,0,0)",
+                    label: "Trump",
+                    backgroundColor: "rgba(225,0,0,0.2)"
+                },
+                {
+                    // label:"",
+                    borderWidth: 2,
                     data:data,
-                    borderColor:"gray",
-                    backgroundColor:"lightgray",
+                    borderColor:"#cccccc",
+                    backgroundColor:"rgba(232,232,232,1)",
 
                 },
 
@@ -89,22 +112,32 @@ function drawLabelChart(data, labels, container, paddingBottom) {
                 {
                     data:data,
                     label: "",
-                    fill:"white",
+                    fill:"red",
                     backgroundColor:"white",
-                    borderColor:"white"
-
+                    borderColor:"white",
                 }
             ]
         },
         options: {
+            defaultColor: "red",
+            defaultFontColor:"red",
+            fontColor: 'red',
+            legend: {
+                labels: {
+                    fontColor: 'red' //set your desired color
+                }
+            },
             responsive: false,
             title: {
                 display: false,
                 text: 'Year'
             },
-            legend: {
-                display:false,
-            },
+            // legend: {
+            //     display:false,
+            //     labels: {
+            //         fontColor: 'red'
+            //     }
+            // },
             scales: {
                 yAxes: [{
                     // ticks: {
@@ -142,58 +175,60 @@ function drawLabelChart(data, labels, container, paddingBottom) {
 
         }
     });
+    // Chart.defaults.global.defaultFontColor = 'green';
+
 }
 
 
 function drawCharts(data, senateMajorityHeight) {
-    var SenateMajorityColorChart = bb.generate({
-        "data": {
-            "columns": [
-                data.SenateMajority.Republican,
-                data.SenateMajority.Democrat,
-                data.SenateMajority.Other
-            ],
-            "types": {
-                "republican": "area-step",
-                "democrat": "area-step",
-                "other": "area-step"
-            },
-            "colors": {
-                "republican": "red",
-                "democrat": "blue",
-                "other": "gray"
-            }
-        },
-        "size": {
-            "height": senateMajorityHeight,
-            "width": 1200
-        },
-
-        "axis": {
-            y: {
-                show:false,
-                padding: {
-                    top: 0,
-                    bottom: 0
-                }
-
-            },
-            x: {
-                tick: {
-                    outer: false
-                },
-                show:false
-
-            }
-        },
-        "bindto": "#cabinetChart",
-        "legend": {
-            "show": false
-        },
-        "tooltip": {
-            "show": false
-        }
-    });
+    // var SenateMajorityColorChart = bb.generate({
+    //     "data": {
+    //         "columns": [
+    //             data.SenateMajority.Republican,
+    //             data.SenateMajority.Democrat,
+    //             data.SenateMajority.Other
+    //         ],
+    //         "types": {
+    //             "republican": "area-step",
+    //             "democrat": "area-step",
+    //             "other": "area-step"
+    //         },
+    //         "colors": {
+    //             "republican": "red",
+    //             "democrat": "blue",
+    //             "other": "gray"
+    //         }
+    //     },
+    //     "size": {
+    //         "height": senateMajorityHeight,
+    //         "width": 1200
+    //     },
+    //
+    //     "axis": {
+    //         y: {
+    //             show:false,
+    //             padding: {
+    //                 top: 0,
+    //                 bottom: 0
+    //             }
+    //
+    //         },
+    //         x: {
+    //             tick: {
+    //                 outer: false
+    //             },
+    //             show:false
+    //
+    //         }
+    //     },
+    //     "bindto": "#cabinetChart",
+    //     "legend": {
+    //         "show": false
+    //     },
+    //     "tooltip": {
+    //         "show": false
+    //     }
+    // });
 
     var AdminPartyColorChart = bb.generate({
         "data": {
@@ -217,7 +252,7 @@ function drawCharts(data, senateMajorityHeight) {
             }
         },
         "size": {
-            "height": 150,
+            "height": 180,
             "width": 1200
         },
 
@@ -289,12 +324,13 @@ function drawCharts(data, senateMajorityHeight) {
     drawLabelChart(data.Zero, data.Administration, $("#presidentChart"), 150);
 
     $("#yearsChart").remove();
-    $( "#cabinetCharts" ).after('<canvas id="yearsChart" width="1200" height="200"></canvas>');
-    drawLabelChart(data.Zero, data.Year, $("#yearsChart"), 50);
+    $( "#cabinetCharts" ).after('<canvas id="yearsChart" width="1200" height="100"></canvas>');
+    drawLabelChart(data.Zero, data.Year, $("#yearsChart"),0);
 }
 var FROM_YEAR = 1789;
 var TO_YEAR = 2017;
 var LENGTH_OF_ARRAY = 229;
+
 $(document).ready(function() {
 
 
@@ -470,7 +506,7 @@ $(document).ready(function() {
             checkCounter++;
           }
         }
-        var senateMajorityHeight =(200 * checkCounter) + 200;
+        var senateMajorityHeight =(200 * checkCounter) + 100;
         $("#adminPartyChartContainer").css("top", senateMajorityHeight);
         $("#controls").css("top", senateMajorityHeight + 200);
         drawCharts(data, senateMajorityHeight);

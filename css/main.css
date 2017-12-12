@@ -16,13 +16,6 @@
     margin-left:14px;
 }
 
-#testChart {
-    position:absolute;
-    top: 550px;
-    z-index:2;
-    margin-left:14px;
-}
-
 #appointmentsChart {
     margin-top: 0px;
 }
