@@ -181,54 +181,65 @@ function drawLabelChart(data, labels, container, paddingBottom) {
 
 
 function drawCharts(data, senateMajorityHeight) {
-    // var SenateMajorityColorChart = bb.generate({
-    //     "data": {
-    //         "columns": [
-    //             data.SenateMajority.Republican,
-    //             data.SenateMajority.Democrat,
-    //             data.SenateMajority.Other
-    //         ],
-    //         "types": {
-    //             "republican": "area-step",
-    //             "democrat": "area-step",
-    //             "other": "area-step"
-    //         },
-    //         "colors": {
-    //             "republican": "red",
-    //             "democrat": "blue",
-    //             "other": "gray"
-    //         }
-    //     },
-    //     "size": {
-    //         "height": senateMajorityHeight,
-    //         "width": 1200
-    //     },
-    //
-    //     "axis": {
-    //         y: {
-    //             show:false,
-    //             padding: {
-    //                 top: 0,
-    //                 bottom: 0
-    //             }
-    //
-    //         },
-    //         x: {
-    //             tick: {
-    //                 outer: false
-    //             },
-    //             show:false
-    //
-    //         }
-    //     },
-    //     "bindto": "#cabinetChart",
-    //     "legend": {
-    //         "show": false
-    //     },
-    //     "tooltip": {
-    //         "show": false
-    //     }
-    // });
+    var SenateMajorityColorChart = bb.generate({
+        "data": {
+            "columns": [
+                data.SenateMajority.Republican,
+                data.SenateMajority.Democrat,
+                data.SenateMajority.Other
+            ],
+            "types": {
+                "republican": "area-step",
+                "democrat": "area-step",
+                "other": "area-step"
+            },
+            "colors": {
+                "republican": "red",
+                "democrat": "blue",
+                "other": "gray"
+            }
+        },
+        "size": {
+            "height": senateMajorityHeight,
+            "width": 1200
+        },
+
+        "axis": {
+            y: {
+                show:false,
+                padding: {
+                    top: 0,
+                    bottom: 0
+                }
+
+            },
+            x: {
+                tick: {
+                    outer: false
+                },
+                show:false
+
+            }
+        },
+        "bindto": "#cabinetChart",
+        "legend": {
+            "show": false
+        },
+        "tooltip": {
+            // "format": {
+            //     "title": function (d) { return '' },
+            //     "value": function (value, ratio, id) {
+            //         return 'Senate Majority Party';
+            //     }
+            // },
+            contents: function() {
+                return "Senate Majority Party"
+            },
+            "show": true,
+            "grouped": false
+
+        }
+    });
 
     var AdminPartyColorChart = bb.generate({
         "data": {
@@ -506,9 +517,12 @@ $(document).ready(function() {
             checkCounter++;
           }
         }
-        var senateMajorityHeight =(200 * checkCounter) + 100;
-        $("#adminPartyChartContainer").css("top", senateMajorityHeight);
-        $("#controls").css("top", senateMajorityHeight + 200);
+        var dataChartsHeight =(200 * checkCounter) + 100;
+        var senateMajorityHeight = 60;
+        $("#adminPartyChartContainer").css("top", dataChartsHeight);
+            $("#senate").css("top", dataChartsHeight);
+
+            $("#cabinetChart").css("top", dataChartsHeight - 55);
         drawCharts(data, senateMajorityHeight);
 
 
