@@ -228,7 +228,7 @@ function drawCharts(data, senateMajorityHeight) {
         "tooltip": {
 
             contents: function() {
-                return "<div style='width:150px; height:50px; background-color: white; border: 1px solid gray'>Color indicating senate majority party</div>"
+                return "<div style='width:150px; height:50px; background-color: white; border: 1px solid gray;  padding:5px;'>Color indicating senate majority party</div>"
             },
             "show": true,
             "grouped": false
@@ -287,7 +287,7 @@ function drawCharts(data, senateMajorityHeight) {
         "tooltip": {
 
             contents: function() {
-                return "<div style='width:150px; height:50px; background-color: white; border: 1px solid gray'>Color indicating Administration party</div>"
+                return "<div style='width:150px; height:50px; background-color: white; border: 1px solid gray; padding:5px;'>Color indicating Administration party</div>"
             },
             "show": true,
             "grouped": false
