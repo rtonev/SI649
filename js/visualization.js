@@ -17,7 +17,6 @@ function calculateAverage(data) {
 }
 function drawChart(data, labels, container, title) {
     var average = calculateAverage(data);
-    console.log(average);
 
     var chart = new Chart(container, {
         type: 'line',
@@ -26,22 +25,44 @@ function drawChart(data, labels, container, title) {
 
             datasets: [
                 {
-                    data: Array.apply(null, new Array(LENGTH_OF_ARRAY)).map(Number.prototype.valueOf,average),
+                    data: Array.apply(null, new Array(229)).map(Number.prototype.valueOf,average),
                     fill: false,
-                    radius: 1,
+                    radius: 2,
                     borderWidth:0,
-                    borderColor:"rgba(89,240,158,0.2)",
+                    borderColor:"rgba(89,240,158,0)",
                     label: "Average",
+                    backgroundColor: "rgba(89,240,158,0)",
+                    point: "square",
+
+                },
+                {
+                    data: Array.apply(null, new Array(229)).map(Number.prototype.valueOf,average),
+                    fill: false,
+                    radius: 0,
+                    borderWidth:4,
+                    borderColor:"rgba(89,240,158,0.2)",
+                    label: "",
                     backgroundColor: "rgba(89,240,158,0.2)",
                     point: "square"
                 },
                 {
-                    data: Array.apply(null, new Array(LENGTH_OF_ARRAY)).map(Number.prototype.valueOf,data[LENGTH_OF_ARRAY-1]),
+                    data: Array.apply(null, new Array(229)).map(Number.prototype.valueOf,data[LENGTH_OF_ARRAY-1]),
                     fill: false,
-                    radius: 1,
+                    radius: 2,
                     borderWidth:0,
-                    borderColor:"rgba(225,70,96,0.2)",
+                    borderColor:"rgba(225,70,96,0)",
                     label: "Trump",
+                    backgroundColor: "rgba(225,70,96,0)",
+                    point: "square"
+
+                },
+                {
+                    data: Array.apply(null, new Array(229)).map(Number.prototype.valueOf,data[LENGTH_OF_ARRAY-1]),
+                    fill: false,
+                    radius: 0,
+                    borderWidth:4,
+                    borderColor:"rgba(225,70,96,0.2)",
+                    label: "",
                     backgroundColor: "rgba(225,70,96,0.2)",
                     point: "square"
 
