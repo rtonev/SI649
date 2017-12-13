@@ -26,20 +26,23 @@ function drawChart(data, labels, container, title) {
                 {
                     data: Array.apply(null, new Array(LENGTH_OF_ARRAY)).map(Number.prototype.valueOf,average),
                     fill: false,
-                    radius: 2,
+                    radius: 1,
                     borderWidth:0,
                     borderColor:"rgba(89,240,158,0.2)",
                     label: "Average",
-                    backgroundColor: "rgba(89,240,158,0.2)"
+                    backgroundColor: "rgba(89,240,158,0.2)",
+                    point: "square"
                 },
                 {
                     data: Array.apply(null, new Array(LENGTH_OF_ARRAY)).map(Number.prototype.valueOf,data[LENGTH_OF_ARRAY-1]),
                     fill: false,
                     radius: 1,
                     borderWidth:0,
-                    borderColor:"rgba(225,0,0,0.2)",
+                    borderColor:"rgba(225,70,96,0.2)",
                     label: "Trump",
-                    backgroundColor: "rgba(225,0,0,0.2)"
+                    backgroundColor: "rgba(225,70,96,0.2)",
+                    point: "square"
+
                 },
                 {
                     borderWidth: 2,
