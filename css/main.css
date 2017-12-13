@@ -24,18 +24,9 @@
   overflow: auto;
 }
 #controls {
-    position: absolute;
-    top: 1600px;
     padding-left: 10px;
-    padding-right: 200px;
+    /*padding-right: 200px;*/
 }
-
-/*#slidercontrol {*/
-  /*position: relative;*/
-  /*top: 1600px;*/
-  /*padding-left: 10px;*/
-  /*padding-right: 200px;*/
-/*}*/
 
 #checkboxgroup {
   position:relative;

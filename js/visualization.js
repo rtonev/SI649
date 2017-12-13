@@ -145,25 +145,15 @@ function drawLabelChart(data, labels, container, paddingBottom) {
             ]
         },
         options: {
-            defaultColor: "red",
-            defaultFontColor:"red",
-            fontColor: 'red',
+
             legend: {
-                labels: {
-                    fontColor: 'red' //set your desired color
-                }
+                display:false,
             },
             responsive: false,
             title: {
                 display: false,
                 text: 'Year'
             },
-            // legend: {
-            //     display:false,
-            //     labels: {
-            //         fontColor: 'red'
-            //     }
-            // },
             scales: {
                 yAxes: [{
                     // ticks: {
@@ -547,9 +537,9 @@ $(document).ready(function() {
         var dataChartsHeight =(200 * checkCounter) + 100;
         var senateMajorityHeight = 60;
         $("#adminPartyChartContainer").css("top", dataChartsHeight);
-            $("#senate").css("top", dataChartsHeight);
-
-            $("#cabinetChart").css("top", dataChartsHeight - 55);
+        $("#senate").css("top", dataChartsHeight);
+        $("#controls").css("top", dataChartsHeight + 20);
+        $("#cabinetChart").css("top", dataChartsHeight - 55);
         drawCharts(data, senateMajorityHeight);
 
 

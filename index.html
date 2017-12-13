@@ -3,67 +3,69 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="css/billboard.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.css">
-        <link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.skinFlat.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <title>SI 649</title>
-        <script src="js/billboard.pkgd.min.js"></script>
-        <script
-                src="https://code.jquery.com/jquery-3.2.1.min.js"
-                integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-                crossorigin="anonymous"></script>
-        <script src="js/data.js"></script>
-        <script src="js/interactions.js"></script>
-        <script src="js/visualization.js"></script>
-        <script src = "js/ion.rangeSlider.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+
+        <title>Is Trump An Anomaly?</title>
+        <style>
+        h1 {
+        	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+        	font-size: 55px;
+        	font-style: normal;
+        	font-variant: normal;
+        	font-weight: 500;
+            text-align: justify;
+        	/*line-height: 26.4px;*/
+            width: 675px;
+        }
+
+        p {
+            margin-top: 20px;
+        	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+        	font-size: 24px;
+        	/*font-style: normal;*/
+        	/*font-variant: normal;*/
+        	/*font-weight: 400;*/
+          /*text-align: justify;*/
+        	/*line-height: 30px;*/
+          width: 675px;
+        }
+
+        a.button {
+            font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+            /*-webkit-appearance: button;*/
+            /*-moz-appearance: button;*/
+            /*appearance: button;*/
+            font-size: 20px;
+            /*font-style: normal;*/
+            /*font-variant: normal;*/
+
+            /*text-decoration: none;*/
+            /*color: initial;*/
+            /*padding:10px;*/
+
+        }
+
+            #buttonContainer {
+                margin-top: 20px;
+                margin-bottom: 50px;
+            }
+
+        </style>
     </head>
     <body>
-        <div id="cabinetCharts"></div>
-        <canvas id="yearsChart" style="margin-left:14px;" width="1200" height="45"></canvas>
-        <canvas id="presidentChart" style="margin-left:14px;" width="1200" height="150"></canvas>
-        <div id="cabinetChartContainer">
-            <div id="cabinetChart" style="position:relative"></div>
-        </div>
-        <div id="adminPartyChartContainer">
-            <div id="adminPartyChart" style="position:relative"></div>
-        </div>
-        <div id="controls">
-            <div id="slidercontrol">
-                <div>
-                    <input type="text" id="range" value="" name="range" />
-                </div>
-            </div>
-            <div id="checkboxgroup">
-                <div class="form-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="AvgDaysServed" id="AvgDaysServed" checked>
-                        Average Days Served
-                    </label>
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="numAppointments" id="numAppointments" checked>
-                        # of appointments per Cabinet
-                    </label>
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="avgEaseOfConfirmation" id="avgEaseOfConfirmation" checked>
-                        Average ease of Confirmation
-                    </label>
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="perMinority" id="perMinority" checked>
-                        % Minority
-                    </label>
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="perMale" id="perMale" checked>
-                        % Male
-                    </label>
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="graphsDisplay" value="perMilitary" id="perMilitary" checked>
-                        % Served in Military
-                    </label>
-                </div>
+    <div class="container col-xs-12">
+        <h1 class="col-xs-6 col-xs-offset-2">Is Trump An Anomaly?</h1>
+        <img class="col-xs-6 col-xs-offset-2" src="img/flag.png">
+        <div class="col-xs-6 col-xs-offset-2">
+            <p>In an increasingly polarized political climate in the US, we are attempting to examine if the Trump administration is truly as contentious as people believe it to be.</p>
+            <p>To do that quantitatively, we are looking at the people Trump has surrounded himself with. Comparing his cabinet with all past presidential cabinets.</p>
+            <p>This visualization will allow you to see each administration's characteristics going back all the way to the days of George Washington. The characteristics we have chosen
+                to be on display are average days served, number of cabinet members appointed, ease of confirmation, cabinet minority percentage, percentage of male cabinet members, and
+                percentage of members that served in the military. </p>
+            <div id="buttonContainer">
+                <a class="btn btn-primary button" href="graph.html" >Enjoy Graph</a>
             </div>
         </div>
+    </div>
     </body>
 </html>
