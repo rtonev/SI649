@@ -6,7 +6,9 @@ Array.prototype.max = function() {
 function calculateAverage(data) {
     var sum = 0;
     for (var i=0; i<data.length; i++) {
-        sum += data[i];
+        if (data[i] != ""){
+            sum += data[i];
+        }
     }
     var rawAverage = sum/data.length;
 
@@ -15,8 +17,8 @@ function calculateAverage(data) {
 }
 function drawChart(data, labels, container, title) {
     var average = calculateAverage(data);
-    console.log (LENGTH_OF_ARRAY);
-    console.log(data);
+    console.log(average);
+
     var chart = new Chart(container, {
         type: 'line',
         data : {
